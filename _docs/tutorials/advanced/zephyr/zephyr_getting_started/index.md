@@ -281,7 +281,7 @@ First of all, create and build a micro-ROS agent:
 ros2 run micro_ros_setup create_agent_ws.sh
 
 # Build micro-ROS-Agent packages, this may take a while.
-colcon build --metas src
+colcon build
 source install/local_setup.bash
 ```
 
@@ -298,7 +298,7 @@ ros2 run micro_ros_agent micro_ros_agent serial --dev [device]
 
 ***TIP:** you can use this command to find your serial device name: `ls /dev/serial/by-id/*`. Probably it will be something like `/dev/serial/by-id/usb-ZEPHYR_Zephyr_microROS_3536510100290035-if00`*
 
-And finally, let's check that everything is working  in another command line. We are going to listen to ping topic to check whether the Ping Pong node is publishing its own pings
+And finally, let's check that everything is working in another command line. We are going to listen to ping topic to check whether the Ping Pong node is publishing its own pings
 
 ```bash
 source /opt/ros/$ROS_DISTRO/setup.bash
@@ -310,7 +310,7 @@ ros2 topic echo /microROS/ping
 You should see the topic messages published by the Ping Pong node every 5 seconds:
 
 ```
-pgarrido@pgarrido:~$ ros2 topic echo /microROS/ping
+user@user:~$ ros2 topic echo /microROS/ping
 stamp:
   sec: 20
   nanosec: 867000000
@@ -344,7 +344,7 @@ ros2 topic pub --once /microROS/ping std_msgs/msg/Header '{frame_id: "fake_ping"
 Now, we should see on the ping subscriber our fake ping along with the board pings:
 
 ```
-pgarrido@pgarrido:~$ ros2 topic echo /microROS/ping
+user@user:~$ ros2 topic echo /microROS/ping
 stamp:
   sec: 0
   nanosec: 0
@@ -365,7 +365,7 @@ frame_id: '2084670932_1085377743'
 And in the pong subscriber, we should see the board's answer to our fake ping:
 
 ```
-pgarrido@pgarrido:~$ ros2 topic echo /microROS/pong
+user@user:~$ ros2 topic echo /microROS/pong
 stamp:
   sec: 0
   nanosec: 0
